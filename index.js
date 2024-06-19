@@ -12,10 +12,19 @@
 // require('./person1')
 // require('./person2')
 
-const person = require('./personClass')
-console.log(person.getName()) //Person1
-person.setName('Person2')
-console.log(person.getName()) //Person2
+// const person = require('./personClass')
+// console.log(person.getName()) //Person1
+// person.setName('Person2')
+// console.log(person.getName()) //Person2
 
-const newPerson = require('./personClass')
-console.log(newPerson.getName()) //Person2
+// const newPerson = require('./personClass')
+// console.log(newPerson.getName()) //Person2
+
+// const math = require('./math.js')
+// console.log(math.add(1, 2))
+// console.log(math.subtract(1, 2))
+
+// JSON
+const data = require('./data.json')
+
+console.log(data)
