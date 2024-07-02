@@ -1,1 +1,13 @@
-const connection = 'mongodb+srv://Adam:<password>@nodeandexpresstutorial1.uo0aj9v.mongodb.net/?retryWrites=true&w=majority&appName=NodeAndExpressTutorial1'
+const mongoose = require('mongoose')
+
+
+const connectDB = (url) => {
+    mongoose.connect(url, {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useFindAndModify: true,
+        useUnifiedTopology: true
+    }).then(() => console.log('CONNECTED TO THE DB')).catch(err => console.log(err))
+}
+
+module.exports = connectDB
