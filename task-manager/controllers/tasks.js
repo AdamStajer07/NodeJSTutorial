@@ -33,13 +33,43 @@ const getTask = async (req, res) => {
         res.status(500).json({ msg: err })
     }
 }
-const updateTask = (req, res) => {
-    res.send('Update task')
-}
 const deleteTask = async (req, res) => {
     try {
         const { id: taskID } = req.params
         const task = await Task.findOneAndDelete({ _id: taskID })
+        if (!task) {
+            return res.status(404).json({ msg: 'no task with this id' })
+        }
+        res.status(200).json({ task })
+    }
+    catch (err) {
+        res.status(500).json({ msg: err })
+    }
+}
+const updateTask = async (req, res) => {
+    try {
+        const { id: taskID } = req.params
+        const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
+            new: true,
+            runValidators: true
+        })
+        if (!task) {
+            return res.status(404).json({ msg: 'no task with this id' })
+        }
+        res.status(200).json({ task })
+    }
+    catch (err) {
+        res.status(500).json({ msg: err })
+    }
+}
+const editTask = async (req, res) => {
+    try {
+        const { id: taskID } = req.params
+        const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
+            new: true,
+            runValidators: true,
+            overwrite: true
+        })
         if (!task) {
             return res.status(404).json({ msg: 'no task with this id' })
         }
@@ -55,5 +85,6 @@ module.exports = {
     createTask,
     getTask,
     updateTask,
-    deleteTask
+    deleteTask,
+    editTask
 }
